@@ -1,4 +1,4 @@
-# pyinstaller -F --hiddenimport=pydicom.encoders.gdcm --hiddenimport=pydicom.encoders.pylibjpeg D:\ToolBox\comp\WHT_convert_dicom2nii.py
+# pyinstaller -F --hiddenimport=pydicom.encoders.gdcm --hiddenimport=pydicom.encoders.pylibjpeg D:\ToolBox\comp\WHT_convert_dicom2nii.py --windows-icon-from-ico=D:\ToolBox\code\icon-console.ico
 import argparse
 import os
 import SimpleITK as sitk

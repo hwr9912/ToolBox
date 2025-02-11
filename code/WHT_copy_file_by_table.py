@@ -1,4 +1,5 @@
 # pyinstaller -F D:\ToolBox\code\WHT_copy_file_by_table.py
+# "E:\Anaconda_envs\envs\pack\Lib\site-packages\PyInstaller\bootloader\images\icon-console.ico"
 import argparse
 import os
 import shutil
