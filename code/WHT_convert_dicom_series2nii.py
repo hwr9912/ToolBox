@@ -1,4 +1,4 @@
-# pyinstaller -F --hiddenimport=pydicom.encoders.gdcm --hiddenimport=pydicom.encoders.pylibjpeg D:\ToolBox\comp\WHT_convert_dicom_series2nii.py
+# pyinstaller -F --hiddenimport=pydicom.encoders.gdcm --hiddenimport=pydicom.encoders.pylibjpeg code\WHT_convert_dicom_series2nii.py
 import argparse
 import os
 import SimpleITK as sitk

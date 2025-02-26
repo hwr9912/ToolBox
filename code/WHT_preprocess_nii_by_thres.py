@@ -3,6 +3,7 @@
 # conda install python pyinstaller tqdm numpy
 # conda install simpleitk -c conda-forge
 # pyinstaller -F D:\ToolBox\code\WHT_preprocess_nii_by_thres.py
+# nuitka --standalone --onefile D:\ToolBox\code\WHT_preprocess_nii_by_thres.py --windows-icon-from-ico=D:\ToolBox\code\icon-console.ico
 import os
 import argparse
 import numpy as np
@@ -22,9 +23,9 @@ def single(image_path, save_path, args):
     image = sitk.ReadImage(image_path)
     matrix = sitk.GetArrayFromImage(image)
     if args.upper < matrix.max():
-        matrix[matrix > args.upper] = 0
+        matrix[matrix > args.upper] = args.upper
     if args.lower > matrix.min():
-        matrix[matrix < args.lower] = 0
+        matrix[matrix < args.lower] = args.lower
     result = sitk.GetImageFromArray(matrix)
     result.SetOrigin(image.GetOrigin())  # 恢复原始大小
     result.SetSpacing(image.GetSpacing())
@@ -60,16 +61,16 @@ def parse_args(text):
     parser.add_argument("--single", "-s", action="store_true", default=False,
                         help="单文件模式，该模式下仅处理单个文件。默认为批处理模式")
     parser.add_argument("--upper", "-u", type=np.float16, default=np.inf,
-                        help="像素值上界，超出上界的像素赋值为0")
+                        help="像素值上界，超出上界的像素赋值为上界")
     parser.add_argument("--lower", "-l", type=np.float16, default=-np.inf,
-                        help="像素值下界，低于下界的像素赋值为0")
+                        help="像素值下界，低于下界的像素赋值为下界")
     args = parser.parse_args()
 
     return args
 
 
 if __name__ == "__main__":
-    args = parse_args("对目录下或单个的nifti格式数据进行阈值操作，超出阈值上下限的均赋值为0")
+    args = parse_args("对目录下或单个的nifti格式数据进行阈值操作，超出阈值上下限的均赋值为上下界")
 
     # 单文件模式
     if args.single:
